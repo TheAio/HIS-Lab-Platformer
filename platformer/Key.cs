@@ -1,9 +1,10 @@
 ﻿namespace platformer;
 
-partial class Entity
+public class Key : Entity
 {
-    public class Key : Entity
+    private Key() : base("keyTexture")
     {
         
-    }
+    } 
 }
+

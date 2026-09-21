@@ -1,10 +1,10 @@
 ﻿namespace platformer;
 
-partial class Entity
+public class Door : Entity
 {
-    
-    public class Door : Entity
+    private Door() : base("textureName")
     {
         
     }
 }
+

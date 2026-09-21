@@ -1,11 +1,13 @@
 ﻿namespace platformer;
 
-partial class Entity
+public class Hero : Entity
 {
-    
-    public class Hero : Entity
+    private static bool hasKey;
+    private static int coins;
+
+    private Hero() : base("heroTexture")
     {
-        private static bool hasKey;
-        private static int coins;
+        
     }
 }
+

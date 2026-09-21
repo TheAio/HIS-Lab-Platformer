@@ -1,8 +1,8 @@
 ﻿namespace platformer;
 
-partial class Entity
+public class Platform : Entity
 {
-    public class Platform
+    private Platform() : base("platformTexture")
     {
         
     }

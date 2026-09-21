@@ -1,8 +1,7 @@
 ﻿namespace platformer;
-
-partial class Entity
+public class Background : Entity
 {
-    public class Background : Entity
+    private Background() : base("backgroundTexture")
     {
         
     }
