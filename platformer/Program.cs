@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
@@ -8,8 +9,7 @@ namespace platformer
     {
         static void Main(string[] args)
         {
-            using (var window = new RenderWindow(
-                       new VideoMode(500, 700), "Platformer"))
+            using (var window = new RenderWindow(new VideoMode(500, 700), "Platformer"))
             {
                 window.Closed += (o, e) => window.Close();
                 Clock clock = new Clock();
