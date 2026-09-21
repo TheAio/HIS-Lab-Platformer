@@ -2,5 +2,8 @@
 
 partial class Entity
 {
-
+    public class Platform
+    {
+        
+    }
 }
