@@ -6,41 +6,58 @@ namespace platformer;
 
 public class Entity
 {
-    private readonly Sprite sprite;
     protected string textureName;
-    public bool dead;
+    private readonly Sprite sprite;
+    public bool Dead;
     private Vector2f position;
     private readonly FloatRect bounds;
 
-    public Vector2f Position
+    protected Entity(string TextureName)
+    {
+        textureName = TextureName;
+        sprite = new Sprite();
+    }
+
+    public Sprite GetSprite
+    {
+        get => sprite;
+    }
+    
+    public virtual Vector2f Position
     {
         get => position;
         set => position = value;
     }
 
-    public FloatRect Bounds
+    public virtual FloatRect Bounds
     {
-        get => bounds;
+        get => sprite.GetGlobalBounds();
     }
 
-    protected Entity(string textureName)
+    
+    public virtual void Create(Scene scene)
+    {
+        sprite.Texture = scene.LoadTexture(textureName);
+    }
+
+    public virtual void Update(Scene scene, float deltaTime)
     {
         
     }
 
-    public void Create(Scene scene)
+    public virtual void Render(RenderTarget target)
     {
-        
+        target.Draw(sprite);
     }
-
-    public void Update(Scene scene, float deltaTime)
+    
+    /*public class Platform : Entity
     {
-        
-    }
-
-    public void Render(RenderTarget target)
-    {
-        
-    }
+        public Platform() : base("tileset")
+        {
+            //Sprite sprite = GetSprite;
+            sprite.TextureRect = new IntRect(0, 0, 18, 18);
+            sprite.Origin = new Vector2f(9, 9);
+        }
+    }*/
     
 }
