@@ -6,8 +6,8 @@ namespace platformer;
 
 public class Scene
 {
-    private readonly Dictionary<string, Texture> textures;
-    private readonly List<Entity> entities;
+    private Dictionary<string, Texture> textures;
+    private List<Entity> entities;
 
     public Scene()
     {
@@ -48,6 +48,8 @@ public class Scene
         foreach (Entity entity in entities)
         {
             entity.Render(target);
+            //Console.WriteLine(entity.Position);
+            
         }
     }
     

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using SFML.Graphics;
 using SFML.System;
 
@@ -6,8 +7,8 @@ namespace platformer;
 
 public class Entity
 {
-    protected string textureName;
-    private readonly Sprite sprite;
+    private string textureName;
+    protected readonly Sprite sprite;
     public bool Dead;
     private Vector2f position;
     private readonly FloatRect bounds;
@@ -25,8 +26,10 @@ public class Entity
     
     public virtual Vector2f Position
     {
-        get => position;
-        set => position = value;
+        // sprite.Position is native SFML code
+        // bra at tutorialen döper saker till exakt samma som som andra saker heter, using using anyone?
+        get => sprite.Position;
+        set => sprite.Position = value;
     }
 
     public virtual FloatRect Bounds

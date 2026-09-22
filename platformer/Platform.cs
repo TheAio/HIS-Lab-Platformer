@@ -11,6 +11,7 @@ public class Platform : Entity
     {
         Sprite sprite = GetSprite;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
-        sprite.Origin = new Vector2f(-5, -5);
+        sprite.Origin = new Vector2f(9, 9);
     }
+    
 }
