@@ -18,7 +18,7 @@ public class Hero : Entity
     private bool isGrounded;
     private bool isUpPressed;
 
-    public Hero() : base("character")
+    public Hero() : base("characters")
     {
         sprite.TextureRect = new IntRect(0, 0, 24, 24);
         sprite.Origin = new Vector2f(12, 12);
