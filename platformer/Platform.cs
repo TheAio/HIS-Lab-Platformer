@@ -7,6 +7,8 @@ namespace platformer;
 
 public class Platform : Entity
 {
+    public override bool Solid => true;
+    
     public Platform() : base("tileset")
     {
         Sprite sprite = GetSprite;

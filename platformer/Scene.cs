@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Platformer;
 using SFML.Graphics;
+using SFML.System;
 
 namespace platformer;
 
@@ -8,6 +12,9 @@ public class Scene
 {
     private Dictionary<string, Texture> textures;
     private List<Entity> entities;
+
+    private string nextScene;
+    private string currentScene;
 
     public Scene()
     {
@@ -22,6 +29,7 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
+        HandleSceneChange();
         //Todo: try replacing this with a foreach loop
         for (int i = entities.Count - 1; i >= 0; i--)
         {
@@ -64,4 +72,107 @@ public class Scene
         textures.Add(name, texture);
         return texture;
     }
+    
+    // Scenechange functions
+    public void Reload()
+    {
+        nextScene = currentScene;
+    }
+
+    public void Load(string input)
+    {
+        nextScene = input;
+    }
+
+    private void HandleSceneChange()
+    {
+        if (nextScene == null) return;
+        entities.Clear();
+        Spawn(new Background());
+        
+        string file = $"assets/{nextScene}.txt";
+        Console.WriteLine($"Loading scene '{file}'");
+
+        foreach (var line in File.ReadLines(file, Encoding.UTF8))
+        {
+            string parsed = line.Trim();
+            
+            int commentAt = parsed.IndexOf('#');
+            if (commentAt >= 0)
+            {
+                parsed = parsed.Substring(0, commentAt);
+                parsed = parsed.Trim();
+            }
+
+            if (parsed.Length == 0)
+            {
+                continue;
+            }
+            
+            string[] words = parsed.Split(' ');
+            string spawnType = words[0];
+            float posX = float.Parse(words[1]);
+            float posY = float.Parse(words[2]);
+            string scene = "";
+            if (spawnType == "d")
+            {
+                scene = words[3];
+            }
+
+            switch (spawnType)
+            {
+                case "w" :
+                    Platform platform = new();
+                    platform.Position = new Vector2f(posX, posY);
+                    Spawn(platform);
+                    Console.WriteLine(123123);
+                    break;
+                case "d" :
+                    Door door = new();
+                    door.Position = new Vector2f(posX, posY);
+                    door.NextRoom = scene;
+                    Spawn(door);
+                    break;
+                case "k" :
+                    Key key = new();
+                    key.Position = new Vector2f(posX, posY);
+                    Spawn(key);
+                    break;
+                case "h" :
+                    Hero hero = new();
+                    hero.Position = new Vector2f(posX, posY);
+                    Spawn(hero);
+                    break;
+            }
+        }
+        
+        currentScene = nextScene;
+        nextScene = null;
+    }
+    
+    // Collision checks
+    public bool TryMove(Entity entity, Vector2f movement)
+    {
+        entity.Position += movement;
+        bool collided = false;
+        
+        for (int i = 0; i < entities.Count; i++)
+        {
+            Entity other = entities[i];
+            if (!other.Solid) continue;
+            if (other == entity) continue;
+            
+            FloatRect boundsA = entity.Bounds;
+            FloatRect boundsB = other.Bounds;
+            if (Collision.RectangleRectangle(boundsA, boundsB, out Collision.Hit hit))
+            {
+                entity.Position += hit.Normal * hit.Overlap;
+                i = -1;
+                collided = true;
+            }
+        }
+        return collided;
+    }
+    
+    
 }

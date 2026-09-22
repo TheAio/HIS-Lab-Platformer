@@ -10,7 +10,15 @@ public class Hero : Entity
     private static int coins;
     private bool faceRight = false;
 
-    private Hero() : base("character.png")
+    public const float WalkSpeed = 100.0f;
+    public const float JumpForce = 250.0f;
+    public const float GravityForce = 400.0f;
+    
+    private float verticalSpeed;
+    private bool isGrounded;
+    private bool isUpPressed;
+
+    public Hero() : base("character")
     {
         sprite.TextureRect = new IntRect(0, 0, 24, 24);
         sprite.Origin = new Vector2f(12, 12);
@@ -20,7 +28,7 @@ public class Hero : Entity
     {
         if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
         {
-            Position -= new Vector2f(100 *  deltaTime, 0);
+            scene.TryMove(this, new Vector2f(WalkSpeed * deltaTime, 0));
             faceRight = false;
         }
 
@@ -29,6 +37,34 @@ public class Hero : Entity
             Position += new Vector2f(100 *  deltaTime, 0);
             faceRight = true;
         }
+        
+        verticalSpeed += GravityForce * deltaTime;
+        if (verticalSpeed > 500.0f) verticalSpeed = 500.0f;
+        isGrounded = false;
+        Vector2f velocity = new Vector2f(0, verticalSpeed * deltaTime);
+        if (scene.TryMove(this, velocity))
+        {
+            if (verticalSpeed > 0.0f)
+            {
+                isGrounded = true;
+            }
+            verticalSpeed = 0.0f;
+        }
+        
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
+        {
+            if (isGrounded && !isUpPressed)
+            {
+                VerticalSpeed = -JumpForce;
+                isUpPressed = true;
+            }
+        }
+        else
+        {
+            isUpPressed = false;
+        }
+
+        
     }
 
     public override void Render(RenderTarget target)
@@ -37,5 +73,10 @@ public class Hero : Entity
         base.Render(target);
     }
     
+    public float VerticalSpeed
+    {
+        get => verticalSpeed;
+        set => verticalSpeed = value;
+    }
 }
 

@@ -5,7 +5,9 @@ namespace platformer;
 
 public class Door : Entity
 {
-    private Door() : base("tileset")
+    public string NextRoom;
+    public bool Unlocked;
+    public Door() : base("tileset")
     {
         sprite.TextureRect = new IntRect(180, 103, 18, 23);
         sprite.Origin = new Vector2f(9, 11);

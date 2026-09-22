@@ -19,11 +19,7 @@ namespace platformer
                 
                 Clock clock = new Clock();
                 Scene scene = new();
-                
-                for (int i = 0; i < 10; i++) { scene.Spawn(new Platform {
-                        Position = new Vector2f(18 + i * 18, 288)
-                    });
-                }
+                scene.Load("level0");
                 
                 while (window.IsOpen)
                 {
