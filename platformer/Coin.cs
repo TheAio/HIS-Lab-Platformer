@@ -22,7 +22,7 @@ public class Coin : Entity
             {
                 if (scene.FindByType<Door>(out Door door))
                 {
-                    Hero.Coins++;
+                    Hero.Coins = 1;
                     Dead = true;
                 }
             }

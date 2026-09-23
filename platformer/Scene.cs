@@ -61,6 +61,7 @@ public class Scene
             entity.Render(target);
             
         }
+        UpdateCoinsGui();
     }
     
     public Texture LoadTexture(string name)
@@ -90,6 +91,32 @@ public class Scene
         nextScene = input;
     }
 
+    void KillCoinsGui()
+    {
+        foreach (Entity entity in entities)
+        {
+            if (entity is Gui)
+            {
+                entity.Dead = true;
+            }
+        }
+    }
+    
+    void UpdateCoinsGui()
+    {
+        // Gui code
+        KillCoinsGui();
+        // Gui code will sadly crash if you get more then 123456788 coins :(
+        Gui gui = new(-1, new Vector2f(9, 9));
+        List<int> guiDigits = gui.GetGuiDigitsFromNumber(Hero.Coins);
+        List<Vector2f> guiOffsets = gui.GetGuiOffsets(Hero.Coins, new Vector2f(27, 9));
+        for (int i = 0; i < guiDigits.Count; i++)
+        {
+            Spawn(new Gui(guiDigits[i], guiOffsets[i]));
+        }
+        Spawn(gui);
+    }
+    
     private void HandleSceneChange()
     {
         if (nextScene == null) return;
@@ -155,18 +182,6 @@ public class Scene
                     break;
             }
         }
-        
-        // Gui code
-        // Gui code will sadly crash if you get more then 123456788 coins :(
-        Gui gui = new(-1, new Vector2f(9, 9));
-        List<int> guiDigits = gui.GetGuiDigitsFromNumber(Hero.Coins);
-        List<Vector2f> guiOffsets = gui.GetGuiOffsets(Hero.Coins, new Vector2f(27, 9));
-        for (int i = 0; i < guiDigits.Count; i++)
-        {
-            Spawn(new Gui(guiDigits[i], guiOffsets[i]));
-        }
-        Spawn(gui);
-        
         currentScene = nextScene;
         nextScene = null;
     }

@@ -22,7 +22,6 @@ public class Gui : Entity
         sprite.Position = guiPosition;
     }
     
-    
     public List<int> GetGuiDigitsFromNumber(int number)
     {
         List<int> digits = new List<int>();

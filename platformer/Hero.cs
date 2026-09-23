@@ -88,7 +88,7 @@ public class Hero : Entity
     public static int Coins
     {
         get => coins;
-        set => coins = value;
+        set => coins += value;
     }
 
     public override void Render(RenderTarget target)
