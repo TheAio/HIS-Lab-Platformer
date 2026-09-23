@@ -156,6 +156,11 @@ public class Scene
             }
         }
         
+        // Gui code
+        Gui gui = new(0);
+        gui.Position = new Vector2f(9, 9);
+        Spawn(gui);
+        
         currentScene = nextScene;
         nextScene = null;
     }
