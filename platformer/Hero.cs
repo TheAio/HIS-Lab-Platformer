@@ -65,9 +65,25 @@ public class Hero : Entity
         {
             isUpPressed = false;
         }
+    }
 
-
-
+    public override FloatRect Bounds 
+    {
+        get 
+        {
+            var bounds = base.Bounds;
+            bounds.Left += 3;
+            bounds.Width -= 6;
+            bounds.Top += 3;
+            bounds.Height -= 3;
+            return bounds;
+        }
+    }
+    
+    public static int Coins
+    {
+        get => coins;
+        set => coins = value;
     }
 
     public override void Render(RenderTarget target)
