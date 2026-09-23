@@ -157,8 +157,14 @@ public class Scene
         }
         
         // Gui code
-        Gui gui = new(0);
-        gui.Position = new Vector2f(9, 9);
+        // Gui code will sadly crash if you get more then 123456788 coins :(
+        Gui gui = new(-1, new Vector2f(9, 9));
+        List<int> guiDigits = gui.GetGuiDigitsFromNumber(Hero.Coins);
+        List<Vector2f> guiOffsets = gui.GetGuiOffsets(Hero.Coins, new Vector2f(27, 9));
+        for (int i = 0; i < guiDigits.Count; i++)
+        {
+            Spawn(new Gui(guiDigits[i], guiOffsets[i]));
+        }
         Spawn(gui);
         
         currentScene = nextScene;
