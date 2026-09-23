@@ -81,7 +81,13 @@ public class Hero : Entity
         get => verticalSpeed;
         set => verticalSpeed = value;
     }
-    
+
+    public static int Coins
+    {
+        get => coins;
+        set => coins = value;
+    }
+
     private void CheckHeroIsOnScreen()
     {
         if (sprite.Position.Y < 0 || 
