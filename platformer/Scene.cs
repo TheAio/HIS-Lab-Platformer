@@ -178,6 +178,20 @@ public class Scene
         }
         return collided;
     }
+
+    public bool FindByType<T>(out T found) where T : Entity
+    {
+        foreach (Entity entity in entities)
+        {
+            if (!entity.Dead && entity is T typed)
+            {
+                found = typed;
+                return true;
+            }
+        }
+        found = default(T);
+        return false;
+    }
     
     public static bool DoReload
     {
