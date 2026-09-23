@@ -19,6 +19,11 @@ public class Door : Entity
 
     public override void Update(Scene scene, float deltaTime)
     {
+        if (Unlocked)
+        {
+            sprite.Color = Color.Black;
+        }
+        
         if (scene.FindByType<Hero>(out Hero hero))
         {
             if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _) && Unlocked)

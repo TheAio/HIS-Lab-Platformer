@@ -25,7 +25,6 @@ public class Key : Entity
                     door.Unlocked = true;
                     
                     Dead = true;
-
                 }
             }
         }
