@@ -16,6 +16,8 @@ public class Scene
     private string nextScene;
     private string currentScene;
 
+    private static bool doReload;
+
     public Scene()
     {
         textures = new Dictionary<string, Texture>();
@@ -29,6 +31,7 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
+        Reload();
         HandleSceneChange();
         //Todo: try replacing this with a foreach loop
         for (int i = entities.Count - 1; i >= 0; i--)
@@ -56,7 +59,6 @@ public class Scene
         foreach (Entity entity in entities)
         {
             entity.Render(target);
-            //Console.WriteLine(entity.Position);
             
         }
     }
@@ -76,7 +78,11 @@ public class Scene
     // Scenechange functions
     public void Reload()
     {
-        nextScene = currentScene;
+        if (doReload)
+        {
+            nextScene = currentScene;
+            doReload = false;
+        }
     }
 
     public void Load(string input)
@@ -125,7 +131,6 @@ public class Scene
                     Platform platform = new();
                     platform.Position = new Vector2f(posX, posY);
                     Spawn(platform);
-                    Console.WriteLine(123123);
                     break;
                 case "d" :
                     Door door = new();
@@ -174,5 +179,9 @@ public class Scene
         return collided;
     }
     
-    
+    public static bool DoReload
+    {
+        get => doReload;
+        set => doReload = value;
+    }
 }

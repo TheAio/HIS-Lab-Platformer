@@ -9,7 +9,7 @@ namespace platformer
     {
         static void Main(string[] args)
         {
-            using (var window = new RenderWindow(new VideoMode(500, 700), "Platformer"))
+            using (var window = new RenderWindow(new VideoMode(Settings.Graphics.ScreenWidth, Settings.Graphics.ScreenHeight), "Platformer"))
             {
                 window.Closed += (o, e) => window.Close();
                 window.SetView(new View(

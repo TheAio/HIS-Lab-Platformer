@@ -26,15 +26,17 @@ public class Hero : Entity
 
     public override void Update(Scene scene, float deltaTime)
     {
+        CheckHeroIsOnScreen();
+        
         if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
         {
-            scene.TryMove(this, new Vector2f(WalkSpeed * deltaTime, 0));
+            scene.TryMove(this, new Vector2f(-WalkSpeed * deltaTime, 0));
             faceRight = false;
         }
 
         if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
         {
-            Position += new Vector2f(100 *  deltaTime, 0);
+            scene.TryMove(this, new Vector2f(WalkSpeed * deltaTime, 0));
             faceRight = true;
         }
         
@@ -51,7 +53,7 @@ public class Hero : Entity
             verticalSpeed = 0.0f;
         }
         
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && isGrounded)
         {
             if (isGrounded && !isUpPressed)
             {
@@ -64,7 +66,8 @@ public class Hero : Entity
             isUpPressed = false;
         }
 
-        
+
+
     }
 
     public override void Render(RenderTarget target)
@@ -77,6 +80,18 @@ public class Hero : Entity
     {
         get => verticalSpeed;
         set => verticalSpeed = value;
+    }
+    
+    private void CheckHeroIsOnScreen()
+    {
+        if (sprite.Position.Y < 0 || 
+            sprite.Position.X < 0 || 
+            sprite.Position.Y > Settings.Graphics.ScreenHeight || 
+            sprite.Position.X > Settings.Graphics.ScreenWidth
+            )
+        {
+            Scene.DoReload = true;
+        }
     }
 }
 
