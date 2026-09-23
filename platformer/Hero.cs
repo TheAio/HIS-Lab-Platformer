@@ -49,8 +49,13 @@ public class Hero : Entity
             if (verticalSpeed > 0.0f)
             {
                 isGrounded = true;
+                verticalSpeed = 0.0f;
             }
-            verticalSpeed = 0.0f;
+            else
+            {
+                verticalSpeed = -0.5f * verticalSpeed;
+                
+            }
         }
         
         if (Keyboard.IsKeyPressed(Keyboard.Key.Up) && isGrounded)
