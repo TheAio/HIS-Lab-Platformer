@@ -31,12 +31,14 @@ public class Hero : Entity
         if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
         {
             scene.TryMove(this, new Vector2f(-WalkSpeed * deltaTime, 0));
+            HeroWalkAnimation();
             faceRight = false;
         }
 
         if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
         {
             scene.TryMove(this, new Vector2f(WalkSpeed * deltaTime, 0));
+            HeroWalkAnimation();
             faceRight = true;
         }
         
@@ -112,6 +114,19 @@ public class Hero : Entity
             )
         {
             Scene.DoReload = true;
+        }
+    }
+
+    private void HeroWalkAnimation()
+    {
+        if (AnimationTime == 30)
+        {
+            sprite.TextureRect = new  IntRect(24, 0, 24, 24);
+                // sprite.TextureRect = new IntRect(0, 0, 24, 24);
+        }
+        else
+        {
+            sprite.TextureRect = new  IntRect(0, 0, 24, 24);
         }
     }
 }

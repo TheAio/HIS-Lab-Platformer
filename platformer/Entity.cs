@@ -14,6 +14,9 @@ public class Entity
     private readonly FloatRect bounds;
     public virtual bool Solid => false;
     
+    private static float timer = 0;
+    private static int  animationTime = 0;
+    
 
     protected Entity(string TextureName)
     {
@@ -47,22 +50,32 @@ public class Entity
 
     public virtual void Update(Scene scene, float deltaTime)
     {
-        
+        AnimationTimer(deltaTime);
     }
 
     public virtual void Render(RenderTarget target)
     {
         target.Draw(sprite);
     }
-    
-    /*public class Platform : Entity
+
+    private void AnimationTimer(float deltaTime)
     {
-        public Platform() : base("tileset")
+        timer  += deltaTime;
+        if (timer > 0.0166)
         {
-            //Sprite sprite = GetSprite;
-            sprite.TextureRect = new IntRect(0, 0, 18, 18);
-            sprite.Origin = new Vector2f(9, 9);
+            timer = 0;
+            animationTime++;
+            Console.WriteLine(animationTime);
+            if (animationTime > 60.0f)
+            {
+                Console.WriteLine(animationTime);
+                animationTime = 0;
+            }
         }
-    }*/
+    }
     
+    public int AnimationTime
+    {
+        get => animationTime;
+    }
 }
