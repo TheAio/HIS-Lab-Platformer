@@ -20,10 +20,25 @@ namespace platformer
                 Clock clock = new Clock();
                 Scene scene = new();
                 scene.Load("level0");
+                float timer = 0;
+                float animationTimer = 0;
                 
                 while (window.IsOpen)
                 {
                     float deltaTime = clock.Restart().AsSeconds();
+                    timer  += deltaTime;
+                    if (timer > 0.0166)
+                    {
+                        timer = 0;
+                        animationTimer++;
+                        Console.WriteLine(animationTimer);
+                        if (animationTimer > 60.0f)
+                        {
+                            Console.WriteLine(animationTimer);
+                            animationTimer = 0;
+                        }
+                    }
+                    
                     window.DispatchEvents();
                     //Update here
                     scene.UpdateAll(deltaTime);
