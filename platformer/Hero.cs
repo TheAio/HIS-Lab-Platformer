@@ -65,9 +65,6 @@ public class Hero : Entity
         {
             isUpPressed = false;
         }
-
-
-
     }
 
     public override void Render(RenderTarget target)
@@ -80,6 +77,19 @@ public class Hero : Entity
     {
         get => verticalSpeed;
         set => verticalSpeed = value;
+    }
+
+    public override FloatRect Bounds
+    {
+        get
+        {
+            var bounds = base.Bounds;
+            bounds.Left += 3;
+            bounds.Width -= 6;
+            bounds.Top += 3;
+            bounds.Height -= 3;
+            return bounds;
+        }
     }
     
     private void CheckHeroIsOnScreen()
