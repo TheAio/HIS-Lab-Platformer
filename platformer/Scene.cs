@@ -132,6 +132,11 @@ public class Scene
                     platform.Position = new Vector2f(posX, posY);
                     Spawn(platform);
                     break;
+                case "c":
+                    Coin coin = new();
+                    coin.Position = new Vector2f(posX, posY);
+                    Spawn(coin);
+                    break;
                 case "d" :
                     Door door = new();
                     door.Position = new Vector2f(posX, posY);
