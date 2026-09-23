@@ -14,9 +14,6 @@ public class Entity
     private readonly FloatRect bounds;
     public virtual bool Solid => false;
     
-    private static float timer = 0;
-    private static int  animationTime = 0;
-    
 
     protected Entity(string TextureName)
     {
@@ -50,32 +47,11 @@ public class Entity
 
     public virtual void Update(Scene scene, float deltaTime)
     {
-        AnimationTimer(deltaTime);
+
     }
 
     public virtual void Render(RenderTarget target)
     {
-        target.Draw(sprite);
-    }
-
-    private void AnimationTimer(float deltaTime)
-    {
-        timer  += deltaTime;
-        if (timer > 0.0166)
-        {
-            timer = 0;
-            animationTime++;
-            Console.WriteLine(animationTime);
-            if (animationTime > 60.0f)
-            {
-                Console.WriteLine(animationTime);
-                animationTime = 0;
-            }
-        }
-    }
-    
-    public int AnimationTime
-    {
-        get => animationTime;
+            target.Draw(sprite);
     }
 }

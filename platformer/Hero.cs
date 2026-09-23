@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 
@@ -18,6 +19,8 @@ public class Hero : Entity
     private bool isGrounded;
     private bool isUpPressed;
 
+    private float heroAnimationTime = 0;
+
     public Hero() : base("characters")
     {
         sprite.TextureRect = new IntRect(0, 0, 24, 24);
@@ -31,15 +34,15 @@ public class Hero : Entity
         if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
         {
             scene.TryMove(this, new Vector2f(-WalkSpeed * deltaTime, 0));
-            HeroWalkAnimation();
             faceRight = false;
+            HeroWalkAnimation(deltaTime);
         }
 
         if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
         {
             scene.TryMove(this, new Vector2f(WalkSpeed * deltaTime, 0));
-            HeroWalkAnimation();
             faceRight = true;
+            HeroWalkAnimation(deltaTime);
         }
         
         verticalSpeed += GravityForce * deltaTime;
@@ -117,16 +120,23 @@ public class Hero : Entity
         }
     }
 
-    private void HeroWalkAnimation()
+    private void HeroWalkAnimation(float deltaTime)
     {
-        if (AnimationTime == 30)
+        if (isGrounded)
         {
-            sprite.TextureRect = new  IntRect(24, 0, 24, 24);
-                // sprite.TextureRect = new IntRect(0, 0, 24, 24);
-        }
-        else
-        {
-            sprite.TextureRect = new  IntRect(0, 0, 24, 24);
+            heroAnimationTime += deltaTime;
+            if (heroAnimationTime < 0.2f)
+            {
+                sprite.TextureRect = new  IntRect(24, 0, 24, 24);
+            }
+            else
+            {
+                sprite.TextureRect = new  IntRect(0, 0, 24, 24);
+                if (heroAnimationTime > 0.4f)
+                {
+                    heroAnimationTime = 0;
+                }
+            }
         }
     }
 }
