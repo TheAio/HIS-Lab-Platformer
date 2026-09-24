@@ -9,7 +9,7 @@ public class Door : Entity
 {
     public string NextRoom;
     public bool Unlocked;
-    private static int index = 1;
+    private static int levelIndex = 1;
     
     public Door() : base("tileset")
     {
@@ -29,17 +29,30 @@ public class Door : Entity
             if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _) && Unlocked)
             {
                 // felhantera så det inte crashar när det tar slut på levels
-                if (index > scene.Levels.Count-1)
+                if (levelIndex > scene.Levels.Count-1)
                 {
                     Scene.DoReload = true;
-                    index = scene.Levels.Count - 1;
+                    levelIndex = scene.Levels.Count - 1;
                     scene.Reload();
                 }
-                scene.Load(scene.Levels[index]);
-                index++;
+
+                if (levelIndex < 0)
+                {
+                    Scene.DoReload = true;
+                    levelIndex = 0;
+                    scene.Reload();
+                }
+                scene.Load(scene.Levels[levelIndex]);
+                levelIndex++;
             }
         }
         base.Update(scene, deltaTime);
+    }
+
+    public static int LevelIndex
+    {
+        get => levelIndex;
+        set => levelIndex += value;
     }
 }
 

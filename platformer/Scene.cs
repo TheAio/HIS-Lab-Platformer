@@ -5,6 +5,7 @@ using System.Text;
 using Platformer;
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 
 namespace platformer;
 
@@ -36,7 +37,6 @@ public class Scene
     {
         Reload();
         HandleSceneChange();
-        //Todo: try replacing this with a foreach loop
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];
