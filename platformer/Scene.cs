@@ -10,9 +10,11 @@ namespace platformer;
 
 public class Scene
 {
+    private const int maxLevel = 2;
     private Dictionary<string, Texture> textures;
     private List<Entity> entities;
 
+    private int currentSceneId = 0;
     private string nextScene;
     private string currentScene;
 
@@ -233,5 +235,21 @@ public class Scene
     {
         get => doReload;
         set => doReload = value;
+    }
+
+    public int CurrentSceneId
+    {
+        get => currentSceneId;
+        set
+        {
+            if (value <= maxLevel)
+            {
+                currentSceneId = value;
+            }
+            else
+            {
+                Console.WriteLine($"Warning: new CurrentSceneId > maxLevel, reverting to {CurrentSceneId}");
+            }
+        }
     }
 }

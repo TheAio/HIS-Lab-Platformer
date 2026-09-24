@@ -28,7 +28,8 @@ public class Door : Entity
         {
             if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _) && Unlocked)
             {
-                NextRoom = "level1";
+                scene.CurrentSceneId += 1;
+                NextRoom = $"level{scene.CurrentSceneId}";
                 scene.Load(NextRoom);
             }
         }
