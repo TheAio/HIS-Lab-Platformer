@@ -13,7 +13,14 @@ public class Entity
     public bool Dead;
     private Vector2f position;
     private readonly FloatRect bounds;
-    public virtual bool Solid => false;
+    private bool solid;
+    
+    //public virtual bool Solid => false;
+    public virtual bool Solid
+    {
+        get => solid;
+        set => solid = value;
+    }
     
 
     protected Entity(string TextureName)

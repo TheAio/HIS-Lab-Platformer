@@ -187,6 +187,11 @@ public class Scene
                     hero.Position = new Vector2f(posX, posY);
                     Spawn(hero);
                     break;
+                case "b" :
+                    Breakables breakables = new();
+                    breakables.Position = new Vector2f(posX, posY);
+                    Spawn(breakables);
+                    break;
             }
         }
         currentScene = nextScene;
