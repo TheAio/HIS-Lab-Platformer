@@ -24,7 +24,7 @@ public class Breakables : Entity
     {
         if (scene.FindByType<Hero>(out Hero hero))
         {
-            Solid = hero.Position.Y > Position.Y ? false : true;
+            Solid = hero.Position.Y > (Position.Y + 8) ? false : true;
             if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _))
             {
                 if ((hero.Position.X > Position.X - 9) && !(hero.Position.X > Position.X + 9) &&!(hero.Position.Y > Position.Y + 9))
