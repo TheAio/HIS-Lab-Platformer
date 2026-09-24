@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -20,10 +21,14 @@ public class Hero : Entity
     private bool isUpPressed;
 
     private float heroAnimationTime = 0;
+    private List<IntRect> heroAnimationFrames = new List<IntRect>();
 
     public Hero() : base("characters")
     {
-        sprite.TextureRect = new IntRect(0, 0, 24, 24);
+        heroAnimationFrames.Add(new  IntRect(0, 0, 24, 24));
+        heroAnimationFrames.Add(new  IntRect(24, 0, 24, 24));
+        
+        sprite.TextureRect = heroAnimationFrames[0];
         sprite.Origin = new Vector2f(12, 12);
     }
 
@@ -129,19 +134,7 @@ public class Hero : Entity
     {
         if (isGrounded)
         {
-            heroAnimationTime += deltaTime;
-            if (heroAnimationTime < 0.2f)
-            {
-                sprite.TextureRect = new  IntRect(24, 0, 24, 24);
-            }
-            else
-            {
-                sprite.TextureRect = new  IntRect(0, 0, 24, 24);
-                if (heroAnimationTime > 0.4f)
-                {
-                    heroAnimationTime = 0;
-                }
-            }
+            sprite.TextureRect = GetNextAnimationTexture(heroAnimationFrames, deltaTime, 0.4f, ref heroAnimationTime);
         }
     }
 }

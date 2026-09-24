@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using SFML.Graphics;
 using SFML.System;
@@ -53,5 +54,15 @@ public class Entity
     public virtual void Render(RenderTarget target)
     {
             target.Draw(sprite);
+    }
+    
+    public virtual IntRect GetNextAnimationTexture(List<IntRect> animationFrames, float deltaTime,float animationLoopTime, ref float animationTimer)
+    {
+        animationTimer += deltaTime;
+        if (animationTimer > animationLoopTime)
+        {
+            animationTimer = 0;
+        }
+        return animationTimer >= (animationLoopTime*0.5f) ? animationFrames[0] : animationFrames[1];
     }
 }

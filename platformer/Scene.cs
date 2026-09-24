@@ -55,6 +55,8 @@ public class Scene
         }
     }
 
+    
+    
     public void RenderAll(RenderTarget target)
     {
         foreach (Entity entity in entities)
