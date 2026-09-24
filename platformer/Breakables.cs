@@ -10,8 +10,6 @@ namespace platformer;
 
 public class Breakables : Entity
 {
-    //public override bool Solid => true;
-    
     public Breakables() : base("tileset")
     {
         Sprite sprite = GetSprite;

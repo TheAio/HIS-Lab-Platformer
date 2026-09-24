@@ -27,11 +27,9 @@ namespace platformer
                     float deltaTime = clock.Restart().AsSeconds();
                     
                     window.DispatchEvents();
-                    //Update here
                     scene.UpdateAll(deltaTime);
                     
                     window.Clear(new Color(67, 160, 188));
-                    //Draw here
                     scene.RenderAll(window);
                     
                     window.Display();

@@ -30,9 +30,4 @@ public class Settings
             }
         }
     }
-
-    public class Input : Settings
-    {
-        // CUSTOM KEYBINDS ON FRIDAY IF TIME
-    }
 }

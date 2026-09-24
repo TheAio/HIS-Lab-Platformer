@@ -36,8 +36,6 @@ public class Entity
     
     public virtual Vector2f Position
     {
-        // sprite.Position is native SFML code
-        // bra at tutorialen döper saker till exakt samma som som andra saker heter, using using anyone?
         get => sprite.Position;
         set => sprite.Position = value;
     }
