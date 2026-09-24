@@ -96,6 +96,11 @@ public class Hero : Entity
         set => coins += value;
     }
 
+    public static void SetCoins(int value)
+    {
+        coins = value;
+    }
+
     public override void Render(RenderTarget target)
     {
         sprite.Scale = new Vector2f(faceRight ? -1 : 1, 1);

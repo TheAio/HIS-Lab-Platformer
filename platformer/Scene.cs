@@ -16,6 +16,7 @@ public class Scene
     private string nextScene;
     private string currentScene;
 
+    private int oldCoins = 0;
     private static bool doReload;
 
     public Scene()
@@ -81,6 +82,7 @@ public class Scene
     {
         if (doReload)
         {
+            Hero.SetCoins(oldCoins);
             nextScene = currentScene;
             doReload = false;
         }
@@ -120,6 +122,7 @@ public class Scene
     private void HandleSceneChange()
     {
         if (nextScene == null) return;
+        oldCoins = Hero.Coins;
         entities.Clear();
         Spawn(new Background());
         
