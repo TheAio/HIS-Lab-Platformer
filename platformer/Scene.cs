@@ -10,11 +10,11 @@ namespace platformer;
 
 public class Scene
 {
-    private const int maxLevel = 2;
     private Dictionary<string, Texture> textures;
     private List<Entity> entities;
+    private List<string> levels = new(){"level0"};
 
-    private int currentSceneId = 0;
+    
     private string nextScene;
     private string currentScene;
 
@@ -153,10 +153,10 @@ public class Scene
             string spawnType = words[0];
             float posX = float.Parse(words[1]);
             float posY = float.Parse(words[2]);
-            string scene = "";
+            string nextLevel = "";
             if (spawnType == "d")
             {
-                scene = words[3];
+                nextLevel = words[3];
             }
 
             switch (spawnType)
@@ -171,10 +171,13 @@ public class Scene
                     coin.Position = new Vector2f(posX, posY);
                     Spawn(coin);
                     break;
-                case "d" :
+                case "d":
                     Door door = new();
                     door.Position = new Vector2f(posX, posY);
-                    door.NextRoom = scene;
+                    if (!levels.Contains(nextLevel))
+                    {
+                        levels.Add(nextLevel);
+                    }
                     Spawn(door);
                     break;
                 case "k" :
@@ -242,19 +245,8 @@ public class Scene
         set => doReload = value;
     }
 
-    public int CurrentSceneId
+    public List<string> Levels
     {
-        get => currentSceneId;
-        set
-        {
-            if (value <= maxLevel)
-            {
-                currentSceneId = value;
-            }
-            else
-            {
-                Console.WriteLine($"Warning: new CurrentSceneId > maxLevel, reverting to {CurrentSceneId}");
-            }
-        }
+        get => levels;
     }
 }

@@ -24,7 +24,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-
+  <!-- https://stackoverflow.com/a/51544654 this piece of code to force copy assets for relative path error ^_^ -->
   <ItemGroup>
     <None Update="assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

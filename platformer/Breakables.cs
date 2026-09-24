@@ -24,12 +24,13 @@ public class Breakables : Entity
     {
         if (scene.FindByType<Hero>(out Hero hero))
         {
+            // måste sätta breakable block till nonsolid när under dom för att annars kan aldrig collision check göras
             Solid = hero.Position.Y > (Position.Y + 8) ? false : true;
             if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _))
             {
+                // gör så att man bara kan breaka block när man är relativt under dom
                 if ((hero.Position.X > Position.X - 9) && !(hero.Position.X > Position.X + 9) &&!(hero.Position.Y > Position.Y + 9))
                 {
-                    Console.WriteLine("asdasdasd");
                     Dead = true;
                 }
             }

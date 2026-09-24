@@ -1,5 +1,5 @@
 ﻿# Door & Key
-d 342 270 level3
+d 342 270 level0
 k 216 72
 
 # Hero
