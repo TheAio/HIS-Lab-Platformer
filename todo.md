@@ -32,7 +32,7 @@
 - [x] Tilesets are used
 - [x] Collision accounts for the graphical representation.
 ### Bonus features
-- [ ] Add a coin entity and show the number of coins picked up somewhere on the screen.
-- [ ] Play a walk animation when the player moves, by toggling between the first and second tiles in characters.png
-- [ ] Add a special platform entity, that breaks when the hero hits it from underneath
-  - [ ] without changing anything in the hero class!
+- [x] Add a coin entity and show the number of coins picked up somewhere on the screen.
+- [x] Play a walk animation when the player moves, by toggling between the first and second tiles in characters.png
+- [x] Add a special platform entity, that breaks when the hero hits it from underneath
+  - [x] without changing anything in the hero class!
